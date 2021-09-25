@@ -39,7 +39,7 @@ namespace GlobalMacroRecorder
         }
         private void MacroForm_Load(object sender, EventArgs e)
         {
-// test
+            Macro_Load();
             string[] parsedArgs = Environment.GetCommandLineArgs();
             if (parsedArgs.Length > 1)
             {
@@ -286,7 +286,14 @@ namespace GlobalMacroRecorder
 
         public void Macro_Load()
         {
-            Stream stream = new FileStream("data.bin", FileMode.Open, FileAccess.Read);
+            if (System.IO.File.Exists("data.bin"))
+            {
+                using (Stream stream = new FileStream("data.bin", FileMode.Open, FileAccess.Read))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    events = (List<MacroEvent>)bin.Deserialize(stream);
+                }
+            }
         }
 
         private void savemacro_CheckedChanged(object sender, EventArgs e)
