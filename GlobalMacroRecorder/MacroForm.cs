@@ -39,7 +39,7 @@ namespace GlobalMacroRecorder
         }
         private void MacroForm_Load(object sender, EventArgs e)
         {
-
+// test
             string[] parsedArgs = Environment.GetCommandLineArgs();
             if (parsedArgs.Length > 1)
             {
